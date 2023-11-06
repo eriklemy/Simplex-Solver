@@ -48,7 +48,7 @@ Portanto, é adequado para estudantes e entusiastas de programação linear que 
 #### 1. Input:
 
 Minimize $\to$ $C = 3x_1 + 2x_2$ <br>
-$ S.t:$
+$S.t:$ <br>
     $2x_1 + 1x_2\leq 18$ <br>
     $2x_1 + 3x_2\leq 42$ <br>
     $3x_1 + 1x_2\leq 24$ <br>
@@ -128,12 +128,12 @@ z: 33
 ---
 
 #### 2. Input:
-Maximize $\to$ $Z = 1x_1 + 2x_2 -1x_3$
-$ S.t:$
-    $2x_1 + 1x_2 + 1x_3 \leq 18$
-    $4x_1 + 2x_2 + 3x_3 \leq 42$
-    $2x_1 + 5x_2 + 5x_3 \leq 24$
-$x_1, x_2, x_3, x_4, x_5, x_6 \geq 0$
+Maximize $\to$ $Z = 1x_1 + 2x_2 -1x_3$ <br>
+$ S.t:$ <br>
+    $2x_1 + 1x_2 + 1x_3 \leq 18$ <br>
+    $4x_1 + 2x_2 + 3x_3 \leq 42$ <br>
+    $2x_1 + 5x_2 + 5x_3 \leq 24$ <br>
+$x_1, x_2, x_3, x_4, x_5, x_6 \geq 0$ <br>
 
 ```python 
 A = [[2, 1, 1], [4, 2, 3], [2, 5, 5]]
@@ -202,11 +202,11 @@ z: 13
 #### 3. Input:
 - Unbounded
 
-Maximize $\to$ $Z = 5x_1 + 4x_2$
-$ S.t:$
-    $1x_1 + 0x_2\leq 7$
-    $1x_1 - 2x_2\leq 8$
-$x_1, x_2 \geq 0$
+Maximize $\to$ $Z = 5x_1 + 4x_2$ <br>
+$ S.t:$ <br>
+    $1x_1 + 0x_2\leq 7$ <br>
+    $1x_1 - 2x_2\leq 8$ <br>
+$x_1, x_2 \geq 0$ <br>
 
 ```python 
 A = [[1, 0], [1, -1]]
