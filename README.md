@@ -49,7 +49,7 @@ No linux:
 - python3 simplex.py
 
 Ou rode diretamente pelo repl.it:
-link: https://replit.com/join/dboqhxqhuy-ericklemmy
+- https://replit.com/join/dboqhxqhuy-ericklemmy
 
 ### Exemplos:
 
