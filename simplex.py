@@ -288,8 +288,8 @@ class UserInterface:
         print(objective, end="")
 
         for i, value in enumerate(tableau.tableau[-1]):
-            # if is_minimize:
-            value *= -1
+            if not is_minimize:
+                value *= -1
             sign = "+" if value >= 0 and i > 0 else "\b"
             if i < len(tableau.tableau[-1]) - 1:
                 print(f"{sign} {value}x{i+1} ", end="")
@@ -312,14 +312,17 @@ class UserInterface:
 
 def main():
     # Dados de exemplo para a matriz A, vetor C e vetor b
-    A = [[2, 1], [2, 3], [3, 1]]
-    C = [3, 2]
-    b = [18, 42, 24]
+    # A = [[2, 1], [2, 3], [3, 1]]
+    # C = [3, 2]
+    # b = [18, 42, 24]
     # A = [[2, 1, 1], [4, 2, 3], [2, 5, 5]]
     # C = [1, 2, -1]
     # b = [14, 28, 30]
+    # ineq = ["<=", "<=", "<="]
+    A = [[1, 0], [1, -1]]
+    C = [5, 4]
+    b = [7, 8]
     ineq = ["<=", "<=", "<="]
-
     ui = UserInterface()
     # A, C, b, ineq = ui.input_matrix()
     solver = SimplexSolver(A, b, ineq)
