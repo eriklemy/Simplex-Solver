@@ -203,6 +203,9 @@ z: 13
 ---
 
 #### 3. Input:
+
+![exemplo_3](/imgs/exemplo_3.png)
+
 Minimize $\to$ $Z = 1x_1 + 2x_2 -1x_3$ <br>
 $S.t:$ <br>
     $2x_1 + 1x_2 + 1x_3 \leq 18$ <br>
@@ -296,3 +299,6 @@ Press enter to continue...
 Soluçao ilimitada (UNBOUNDED). O Problema não possui fronteira
 Todos os elementos da coluna que entra na base sao menores que ZERO ou NULOS.
 ```
+
+#### Programa funcionando:
+![programa_completo](/imgs/programa_rodando.png)
