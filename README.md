@@ -45,8 +45,9 @@ Portanto, é adequado para estudantes e entusiastas de programação linear que 
 
 - Minimização e Maximização de casos otimos:
 
-#### Input:
-1. Minimize $\to$ $C = 3x_1 + 2x_2$
+#### 1. Input:
+
+Minimize $\to$ $C = 3x_1 + 2x_2$
 $ S.t:$
     $2x_1 + 1x_2\leq 18$
     $2x_1 + 3x_2\leq 42$
@@ -60,12 +61,74 @@ b = [18, 42, 24]             # restricao
 ineq = ["<=", "<=", "<="]
 ```
 
-#### Output:
+#### 1. Output:
+```python
+Press enter to continue...
+Iteração: 0
+Pivo: 3
+Variavel entrando: x1
+Variavel saindo: s3
 
+┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│    2   │    1   │    1   │    0   │    0   │   18   │   s1   │
+│    2   │    3   │    0   │    1   │    0   │   42   │   s2   │
+│    3   │    1   │    0   │    0   │    1   │   24   │   s3   │
+│   -3   │   -2   │    0   │    0   │    0   │    0   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Soluçao atual:
+{'x1': 0, 'x2': 0, 's1': Fraction(18, 1), 's2': Fraction(42, 1), 's3': Fraction(24, 1), 'z': 0}
+Press enter to continue...
+Iteração: 1
+Pivo: 1/3
+Variavel entrando: x2
+Variavel saindo: s1
+
+┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│    0   │   1/3  │    1   │    0   │  -2/3  │    2   │   s1   │
+│    0   │   7/3  │    0   │    1   │  -2/3  │   26   │   s2   │
+│    1   │   1/3  │    0   │    0   │   1/3  │    8   │   x1   │
+│    0   │   -1   │    0   │    0   │    1   │   24   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Soluçao atual:
+{'x1': Fraction(8, 1), 'x2': 0, 's1': Fraction(2, 1), 's2': Fraction(26, 1), 's3': 0, 'z': Fraction(24, 1)}
+Press enter to continue...
+Iteração: 2
+Pivo: 4
+Variavel entrando: s3
+Variavel saindo: s2
+
+┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│    0   │    1   │    3   │    0   │   -2   │    6   │   x2   │
+│    0   │    0   │   -7   │    1   │    4   │   12   │   s2   │
+│    1   │    0   │   -1   │    0   │    1   │    6   │   x1   │
+│    0   │    0   │    3   │    0   │   -1   │   30   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Soluçao atual:
+{'x1': Fraction(6, 1), 'x2': Fraction(6, 1), 's1': 0, 's2': Fraction(12, 1), 's3': 0, 'z': Fraction(30, 1)}
+Press enter to continue...
+Número de iterações: 3
+Status da tabela do Simplex:
+
+┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│    0   │    1   │  -1/2  │   1/2  │    0   │   12   │   x2   │
+│    0   │    0   │  -7/4  │   1/4  │    1   │    3   │   s3   │
+│    1   │    0   │   3/4  │  -1/4  │    0   │    3   │   x1   │
+│    0   │    0   │   5/4  │   1/4  │    0   │   33   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+A soluçao é otima
+Solução encontrada:
+x1: 3
+x2: 12
+s1: 0
+s2: 0
+s3: 3
+z: 33
+```
 
 ---
 
-2. Maximize $\to$ $Z = 1x_1 + 2x_2 -1x_3$
+#### 2. Input:
+Maximize $\to$ $Z = 1x_1 + 2x_2 -1x_3$
 $ S.t:$
     $2x_1 + 1x_2 + 1x_3 \leq 18$
     $4x_1 + 2x_2 + 3x_3 \leq 42$
@@ -79,12 +142,65 @@ b = [14, 28, 30]
 ineq = ["<=", "<=", "<="]
 ```
 
-#### Output:
+#### 2. Output:
+```python
+Press enter to continue...
+Degeneração detectada: Há múltiplas variáveis básicas com a mesma razão.
+Iteração: 0
+Pivo: 5
+Variavel entrando: x2
+Variavel saindo: s3
+
+┌───x1───┬───x2───┬───x3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│    2   │    1   │    1   │    1   │    0   │    0   │   14   │   s1   │
+│    4   │    2   │    3   │    0   │    1   │    0   │   28   │   s2   │
+│    2   │    5   │    5   │    0   │    0   │    1   │   30   │   s3   │
+│   -1   │   -2   │    1   │    0   │    0   │    0   │    0   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Soluçao atual:
+{'x1': 0, 'x2': 0, 'x3': 0, 's1': Fraction(14, 1), 's2': Fraction(28, 1), 's3': Fraction(30, 1), 'z': 0}
+Press enter to continue...
+Degeneração detectada: Há múltiplas variáveis básicas com a mesma razão.
+Iteração: 1
+Pivo: 8/5
+Variavel entrando: x1
+Variavel saindo: s1
+
+┌───x1───┬───x2───┬───x3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│   8/5  │    0   │    0   │    1   │    0   │  -1/5  │    8   │   s1   │
+│  16/5  │    0   │    1   │    0   │    1   │  -2/5  │   16   │   s2   │
+│   2/5  │    1   │    1   │    0   │    0   │   1/5  │    6   │   x2   │
+│  -1/5  │    0   │    3   │    0   │    0   │   2/5  │   12   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Soluçao atual:
+{'x1': 0, 'x2': Fraction(6, 1), 'x3': 0, 's1': Fraction(8, 1), 's2': Fraction(16, 1), 's3': 0, 'z': Fraction(12, 1)}
+Press enter to continue...
+Número de iterações: 2
+Status da tabela do Simplex:
+
+┌───x1───┬───x2───┬───x3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│    1   │    0   │    0   │   5/8  │    0   │  -1/8  │    5   │   x1   │
+│    0   │    0   │    1   │   -2   │    1   │    0   │    0   │   s2   │
+│    0   │    1   │    1   │  -1/4  │    0   │   1/4  │    4   │   x2   │
+│    0   │    0   │    3   │   1/8  │    0   │   3/8  │   13   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+A soluçao encontrada é otima pois (Zj - Cj >= 0)
+Porem como existem variaveis basicas nulas.
+Exitem infinitas solucoes possiveis para x_n
+Solução encontrada:
+x1: 5
+x2: 4
+x3: 0
+s1: 0
+s2: 0
+s3: 0
+z: 13
+```
 
 ---
 
-#### Input:
-- Unbounded e Inviavel
+#### 3. Input:
+- Unbounded
 
 3. Maximize $\to$ $Z = 5x_1 + 4x_2$
 $ S.t:$
@@ -96,5 +212,25 @@ $x_1, x_2 \geq 0$
 A = [[1, 0], [1, -1]]
 C = [5, 4]
 b = [7, 8]
-ineq = ["<=", "<=", "<="]
+ineq = ["<=", "<="]
+```
+
+### 3. Output:
+```python
+Press enter to continue...
+Iteração: 0
+Pivo: 1
+Variavel entrando: x1
+Variavel saindo: s1
+
+┌───x1───┬───x2───┬───s1───┬───s2───┬────b───┬────────┐
+│    1   │    0   │    1   │    0   │    7   │   s1   │
+│    1   │   -1   │    0   │    1   │    8   │   s2   │
+│   -5   │   -4   │    0   │    0   │    0   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┘
+Soluçao atual:
+{'x1': 0, 'x2': 0, 's1': Fraction(7, 1), 's2': Fraction(8, 1), 'z': 0}
+Press enter to continue...
+Soluçao ilimitada (UNBOUNDED). O Problema não possui fronteira
+Todos os elementos da coluna que entra na base sao menores que ZERO ou NULOS.
 ```

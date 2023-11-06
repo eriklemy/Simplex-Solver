@@ -10,11 +10,11 @@ from fractions import Fraction
 
 
 class SimplexOutput:
-    UniqueOptimal = 0
-    MultipleOptimal = 1
-    Infeasibe = 2
-    Unbounded = 3
-    Degeneracy = 4
+    UNIQUE_OPTIMAL = 0
+    MULTIPLE_OPTIMAL = 1
+    UNBOUNDED = 2
+    DEGENERACY = 3
+    INFEASIBLE = 2
 
 
 class SimplexSolver:
@@ -42,15 +42,14 @@ class SimplexSolver:
 
     def solve(self):
         max_iterations = 2 * len(self.A[0])
-
         input("Press enter to continue...")
         while not self.is_optimal():
             pivot = self.tableau.find_pivot()
             if pivot[1] < 0:
-                return None, SimplexOutput.Unbounded
+                return None, SimplexOutput.UNBOUNDED
 
             print(f"Iteração: {self.tableau.iteration_count}")
-            print(f"Pivo: {pivot[1]}")
+            print(f"Pivo: {self.tableau.tableau[pivot[1]][pivot[0]]}")
             print(f"Variavel entrando: {self.tableau.entering[pivot[0]]}")
             print(f"Variavel saindo: {self.tableau.departing[pivot[1]]}")
             self.tableau._print_tableau()
@@ -59,21 +58,42 @@ class SimplexSolver:
             self.tableau.step(pivot)
 
         solution = self.get_current_solution()
+
+        # if not self.is_feasibility(solution):
+        #     return solution, SimplexOutput.INFEASIBLE
+
         if self.tableau.iteration_count >= max_iterations:
             print("O problema pode estar degenerado.")
-            return solution, SimplexOutput.Degeneracy
+            return solution, SimplexOutput.DEGENERACY
 
         var = "x" if not self.is_minimize else "y"
-        has_zero_x_value = any(
+        has_zero_value = any(
             value == 0 for key, value in solution.items() if key.startswith(var)
         )
-        if has_zero_x_value:
-            return solution, SimplexOutput.MultipleOptimal
+        if has_zero_value:
+            return solution, SimplexOutput.MULTIPLE_OPTIMAL
 
-        return solution, SimplexOutput.UniqueOptimal
+        return solution, SimplexOutput.UNIQUE_OPTIMAL
 
     def is_optimal(self):
         return all(x >= 0 for x in self.tableau.tableau[-1][:-1])
+
+    def is_feasibility(self, solution, ineq=None):
+        for i in range(len(self.A)):
+            equation_value = sum(
+                self.A[i][j] * solution[self.tableau.entering[j]]
+                for j in range(len(self.A[i]))
+            )
+            if ineq[i] == "=":
+                if equation_value != self.b[i]:
+                    return False
+            elif ineq[i] == ">=":
+                if equation_value < self.b[i]:
+                    return False
+            elif ineq[i] == "<=":
+                if equation_value > self.b[i]:
+                    return False
+        return True
 
     def get_current_solution(self):
         solution = {}
@@ -111,6 +131,7 @@ class SimplexTableau:
         self.departing = []
         self.is_minimize = prob
         self.iteration_count = 0
+        self.degeneracy = False
 
     def initialize(self, A, b, C):
         # Multiplica linha por -1 se ineq >= para transformar em <=
@@ -135,7 +156,6 @@ class SimplexTableau:
         self.tableau.append(self.C + [0] * (len(self.b) + 1))
 
     def add_slack_and_artificial_variables(self):
-        """Add slack & artificial variables to matrix A to transform all inequalities to equalities."""
         slack_vars = self._generate_identity(len(self.tableau))
         for i in range(len(slack_vars)):
             self.tableau[i] += slack_vars[i]
@@ -184,20 +204,36 @@ class SimplexTableau:
         return matrix
 
     def get_entering_var(self):
-        """Get the 'most negative' element of the bottom row."""
         bottom_row = self.tableau[-1]
         most_neg_ind = bottom_row.index(min(bottom_row))
         return most_neg_ind
 
     def get_departing_var(self, entering_index):
-        min_ratio = float("inf")
+        degeneracy = False
+        skip = 0
         min_ratio_index = -1
-        for index, row in enumerate(self.tableau):
-            if row[entering_index] > 0:
-                ratio = row[-1] / row[entering_index]
-                if 0 < ratio < min_ratio:
-                    min_ratio = ratio
-                    min_ratio_index = index
+        min_ratio = 0
+        for index, x in enumerate(self.tableau):
+            if x[entering_index] != 0 and x[-1] / x[entering_index] > 0:
+                skip = index
+                min_ratio_index = index
+                min_ratio = x[-1] / x[entering_index]
+                break
+
+        if min_ratio > 0:
+            for index, x in enumerate(self.tableau):
+                if index > skip and x[entering_index] > 0:
+                    ratio = x[-1] / x[entering_index]
+                    if min_ratio > ratio:
+                        min_ratio = ratio
+                        min_ratio_index = index
+                    elif min_ratio == ratio:
+                        degeneracy = True  # variável básica com a mesma razão
+
+        if degeneracy:
+            print(
+                "Degeneração detectada: Há múltiplas variáveis básicas com a mesma razão."
+            )
         return min_ratio_index
 
     def _generate_identity(self, n):
@@ -229,23 +265,24 @@ class SimplexTableau:
 
 
 class UserInterface:
+    def input_minimize_maximize(self):
+        prob = input("\nDeseja minimizar ou maximizar o problema (Min/Max): ").upper()
+        is_minimize = True if prob in "MINIMIZE" else False
+        return is_minimize
+
     def input_matrix(self):
         print("Insira a matriz de coeficientes (A):")
-        print("Insira o número de equações (linhas):")
-        num_equations = int(input())
-        print("Insira o número de variáveis (colunas):")
-        num_variables = int(input())
+        num_equations = int(input("Insira o número de equações (linhas): "))
+        num_variables = int(input("Insira o número de variáveis (colunas): "))
         A = []
         for i in range(num_equations):
             print(f"Insira os coeficientes da equação {i + 1} separados por espaço:")
             coefficients = list(map(float, input().split()))
             A.append(coefficients)
 
-        # Leitura do vetor de coeficientes da função objetivo (C)
         print("Insira os coeficientes da função objetivo (C) separados por espaço:")
         C = list(map(float, input().split()))
 
-        # Leitura do vetor de constantes (b)
         print("Insira os valores do vetor de constantes (b) separados por espaço:")
         b = list(map(float, input().split()))
 
@@ -264,12 +301,12 @@ class UserInterface:
         print("Status da tabela do Simplex:")
         tableau._print_tableau()
 
-    def print_uniqueOptimal(self):
+    def print_unique_optimal(self):
         print("A soluçao é otima")
 
-    def print_multipleOptimal(self):
+    def print_multiple_optimal(self):
         print("A soluçao encontrada é otima pois (Zj - Cj >= 0)")
-        print("Porem como há uma variavel basica nula.")
+        print("Porem como existem variaveis basicas nulas.")
         print("Exitem infinitas solucoes possiveis para x_n")
 
     def print_degeneracy(self):
@@ -279,19 +316,20 @@ class UserInterface:
         print("Problema é inviável.")
 
     def print_unbounded(self):
-        print("Soluçao ilimitada (Unbounded). O Problema não possui fronteira")
-        print("Todos os elementos da coluna que entra na base sao")
-        print("menores que ZERO ou NULOS.")
+        print("Soluçao ilimitada (UNBOUNDED). O Problema não possui fronteira")
+        print(
+            "Todos os elementos da coluna que entra na base sao menores que ZERO ou NULOS."
+        )
 
     def simplex_show(self, tableau, is_minimize, ineq=None):
-        objective = "Maximize -> Z: " if not is_minimize else "Minimize -> C:"
+        objective = "\nMaximize -> Z: " if not is_minimize else "\nMinimize -> C:"
         print(objective, end="")
 
         for i, value in enumerate(tableau.tableau[-1]):
             if not is_minimize:
                 value *= -1
             sign = "+" if value >= 0 and i > 0 else "\b"
-            if i < len(tableau.tableau[-1]) - 1:
+            if i < len(tableau.tableau[-1]):
                 print(f"{sign} {value}x{i+1} ", end="")
 
         print("\nSubject to:")
@@ -305,55 +343,48 @@ class UserInterface:
             print(f" {ineq[i]} {b}")
 
         for i in range(len(tableau.tableau[0]) - 1):
-            comma = "," if i <= len(tableau.tableau) - 1 else ""
+            comma = "," if i <= len(tableau.tableau) else ""
             print(f"  x{i+1}{comma}", end="")
         print(" >= 0\n\n")
 
 
 def main():
-    # Dados de exemplo para a matriz A, vetor C e vetor b
-    # A = [[2, 1], [2, 3], [3, 1]]
-    # C = [3, 2]
-    # b = [18, 42, 24]
-    # A = [[2, 1, 1], [4, 2, 3], [2, 5, 5]]
-    # C = [1, 2, -1]
-    # b = [14, 28, 30]
-    # ineq = ["<=", "<=", "<="]
-    A = [[1, 0], [1, -1]]
-    C = [5, 4]
-    b = [7, 8]
-    ineq = ["<=", "<=", "<="]
     ui = UserInterface()
-    # A, C, b, ineq = ui.input_matrix()
-    solver = SimplexSolver(A, b, ineq)
+    A, C, b, ineq = ui.input_matrix()
 
-    result = None
-    prob = input("Deseja minimizar ou maximizar o problema (Min/Max): ").upper()
-    is_minimize = True if prob in "MINIMIZE" else False
+    if not A or not C or not b or not ineq:
+        print(
+            "Entrada inválida. Certifique-se de fornecer todas as informações necessárias."
+        )
+        return
+
+    solver = SimplexSolver(A, b, ineq)
+    is_minimize = ui.input_minimize_maximize()
+
     if is_minimize:
         solver.minimize(C)
         ui.simplex_show(solver.tableau, is_minimize, ineq)
         ui.simplex_show(solver.tableau, not is_minimize)
-        solution, result = solver.solve()
     else:
         solver.maximize(C)
         ui.simplex_show(solver.tableau, is_minimize, ineq)
         ui.simplex_show(solver.tableau, is_minimize)
-        solution, result = solver.solve()
 
-    if result == SimplexOutput.Infeasibe:
-        ui.print_infeasibility()
-    elif result == SimplexOutput.UniqueOptimal:
+    solution, result = solver.solve()
+
+    if result == SimplexOutput.UNIQUE_OPTIMAL:
         ui.print_iteration(solver.tableau)
-        ui.print_uniqueOptimal()
+        ui.print_unique_optimal()
         ui.print_solution(solution)
-    elif result == SimplexOutput.MultipleOptimal:
+    elif result == SimplexOutput.MULTIPLE_OPTIMAL:
         ui.print_iteration(solver.tableau)
-        ui.print_multipleOptimal()
+        ui.print_multiple_optimal()
         ui.print_solution(solution)
-    elif result == SimplexOutput.Unbounded:
+    elif result == SimplexOutput.UNBOUNDED:
         ui.print_unbounded()
-    elif result == SimplexOutput.Degeneracy:
+    elif result == SimplexOutput.INFEASIBLE:
+        ui.print_infeasibility()
+    elif result == SimplexOutput.DEGENERACY:
         ui.print_degeneracy()
 
 
