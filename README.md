@@ -47,12 +47,12 @@ Portanto, é adequado para estudantes e entusiastas de programação linear que 
 
 #### 1. Input:
 
-Minimize $\to$ $C = 3x_1 + 2x_2 \\$
-$ S.t: \\$
-    $2x_1 + 1x_2\leq 18 \\$
-    $2x_1 + 3x_2\leq 42 \\$
-    $3x_1 + 1x_2\leq 24 \\$
-$x_1, x_2, x_3, x_4, x_5 \geq 0 \\$
+Minimize $\to$ $C = 3x_1 + 2x_2$ <br>
+$ S.t:$
+    $2x_1 + 1x_2\leq 18$ <br>
+    $2x_1 + 3x_2\leq 42$ <br>
+    $3x_1 + 1x_2\leq 24$ <br>
+$x_1, x_2, x_3, x_4, x_5 \geq 0$ <br>
 
 ```python 
 C = [3, 2]                   # objetivo
