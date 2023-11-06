@@ -7,7 +7,7 @@ Programa de Resolução de Problemas de Programação Linear por Método Simplex
 
 ## TDE - Otimização de Sistemas Lineares
 - **NOME:** Erick Lemmy dos Santos Oliveira
-- **PROF:** Guilherme
+- **PROF:** Guilherme Nunes Nogueira Neto
 
 Este é um programa em Python que resolve problemas de programação linear utilizando o método Simplex. Ele foi desenvolvido como parte de uma tarefa (TDE) para consolidar conhecimentos sobre o funcionamento do método Simplex, incluindo casos de maximização e minimização. O programa também é capaz de lidar com problemas de programação linear com diferentes tipos de restrições (≤, ≥, =).
 
@@ -42,6 +42,9 @@ Portanto, é adequado para estudantes e entusiastas de programação linear que 
 ---
 
 ### Exemplos:
+
+#### Input exemplo:
+![Exemplo](/imgs/exemplo_1.png)
 
 - Minimização e Maximização:
 
@@ -129,7 +132,7 @@ z: 33
 
 #### 2. Input:
 Maximize $\to$ $Z = 1x_1 + 2x_2 -1x_3$ <br>
-$ S.t:$ <br>
+$S.t:$ <br>
     $2x_1 + 1x_2 + 1x_3 \leq 18$ <br>
     $4x_1 + 2x_2 + 3x_3 \leq 42$ <br>
     $2x_1 + 5x_2 + 5x_3 \leq 24$ <br>
@@ -200,10 +203,69 @@ z: 13
 ---
 
 #### 3. Input:
+Minimize $\to$ $Z = 1x_1 + 2x_2 -1x_3$ <br>
+$S.t:$ <br>
+    $2x_1 + 1x_2 + 1x_3 \leq 18$ <br>
+    $4x_1 + 2x_2 + 3x_3 \leq 42$ <br>
+    $2x_1 + 5x_2 + 5x_3 \leq 24$ <br>
+$x_1, x_2, x_3, x_4, x_5, x_6 \geq 0$ <br>
+
+```python 
+A = [[2, 1, 1], [4, 2, 3], [2, 5, 5]]
+C = [1, 2, -1]
+b = [14, 28, 30]
+ineq = ["<=", "<=", "<="]
+```
+
+#### 3. Output:
+```python
+Press enter to continue...
+Iteração: 0
+Pivo: 5
+Variavel entrando: y3
+Variavel saindo: s3
+
+┌───y1───┬───y2───┬───y3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│    2   │    1   │    1   │    1   │    0   │    0   │   14   │   s1   │
+│    4   │    2   │    3   │    0   │    1   │    0   │   28   │   s2   │
+│    2   │    5   │    5   │    0   │    0   │    1   │   30   │   s3   │
+│    1   │    2   │   -1   │    0   │    0   │    0   │    0   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Soluçao atual:
+{'y1': 0, 'y2': 0, 'y3': 0, 's1': Fraction(14, 1), 's2': Fraction(28, 1), 's3': Fraction(30, 1), 'z': 0, 'x1': 0, 'x2': 0, 'x3': 0}
+Press enter to continue...
+Número de iterações: 1
+Status da tabela do Simplex:
+
+┌───y1───┬───y2───┬───y3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
+│   8/5  │    0   │    0   │    1   │    0   │  -1/5  │    8   │   s1   │
+│  14/5  │   -1   │    0   │    0   │    1   │  -3/5  │   10   │   s2   │
+│   2/5  │    1   │    1   │    0   │    0   │   1/5  │    6   │   y3   │
+│   7/5  │    3   │    0   │    0   │    0   │   1/5  │    6   │    z   │
+└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+A soluçao encontrada é otima pois (Zj - Cj >= 0)
+Porem como existem variaveis basicas nulas.
+Exitem infinitas solucoes possiveis para x_n
+Solução encontrada:
+y1: 0
+y2: 0
+y3: 6
+s1: 8
+s2: 10
+s3: 0
+z: 6
+x1: 0
+x2: 0
+x3: 1/5
+```
+
+---
+
+#### 4. Input:
 - Unbounded
 
 Maximize $\to$ $Z = 5x_1 + 4x_2$ <br>
-$ S.t:$ <br>
+$S.t:$ <br>
     $1x_1 + 0x_2\leq 7$ <br>
     $1x_1 - 2x_2\leq 8$ <br>
 $x_1, x_2 \geq 0$ <br>
@@ -215,7 +277,7 @@ b = [7, 8]
 ineq = ["<=", "<="]
 ```
 
-### 3. Output:
+### 4. Output:
 ```python
 Press enter to continue...
 Iteração: 0
