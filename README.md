@@ -40,6 +40,16 @@ Portanto, é adequado para estudantes e entusiastas de programação linear que 
 **Observação:** O programa foi desenvolvido para fins educacionais e de aprendizado ativo. Portanto, os exemplos e dados iniciais podem ser substituídos pelos seus próprios problemas de programação linear.
 
 ---
+### Como executar:
+
+No windows execute:
+- python simplex.py
+
+No linux:
+- python3 simplex.py
+
+Ou rode diretamente pelo repl.it:
+link: https://replit.com/join/dboqhxqhuy-ericklemmy
 
 ### Exemplos:
 
