@@ -1,6 +1,10 @@
 # Simplex-solver
 Programa de Resolução de Problemas de Programação Linear por Método Simplex
 
+### Versoes
+    - Python: completo
+    - Rust: em desenvolvimento (aprendizado).
+
 ## TDE - Otimização de Sistemas Lineares
 - **NOME:** Erick Lemmy dos Santos Oliveira
 - **PROF:** Guilherme
