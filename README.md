@@ -43,16 +43,16 @@ Portanto, é adequado para estudantes e entusiastas de programação linear que 
 
 ### Exemplos:
 
-- Minimização e Maximização de casos otimos:
+- Minimização e Maximização:
 
 #### 1. Input:
 
-Minimize $\to$ $C = 3x_1 + 2x_2$
-$ S.t:$
-    $2x_1 + 1x_2\leq 18$
-    $2x_1 + 3x_2\leq 42$
-    $3x_1 + 1x_2\leq 24$
-$x_1, x_2, x_3, x_4, x_5 \geq 0$
+Minimize $\to$ $C = 3x_1 + 2x_2 \\$
+$ S.t: \\$
+    $2x_1 + 1x_2\leq 18 \\$
+    $2x_1 + 3x_2\leq 42 \\$
+    $3x_1 + 1x_2\leq 24 \\$
+$x_1, x_2, x_3, x_4, x_5 \geq 0 \\$
 
 ```python 
 C = [3, 2]                   # objetivo
@@ -202,7 +202,7 @@ z: 13
 #### 3. Input:
 - Unbounded
 
-3. Maximize $\to$ $Z = 5x_1 + 4x_2$
+Maximize $\to$ $Z = 5x_1 + 4x_2$
 $ S.t:$
     $1x_1 + 0x_2\leq 7$
     $1x_1 - 2x_2\leq 8$
