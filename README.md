@@ -50,7 +50,7 @@ Portanto, é adequado para estudantes e entusiastas de programação linear que 
 
 #### 1. Input:
 
-Minimize $\to$ $C = 3x_1 + 2x_2$ <br>
+Maximize $\to$ $C = 3x_1 + 2x_2$ <br>
 $S.t:$ <br>
     $2x_1 + 1x_2\leq 18$ <br>
     $2x_1 + 3x_2\leq 42$ <br>
