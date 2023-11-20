@@ -3,7 +3,7 @@ Programa de Resolução de Problemas de Programação Linear por Método Simplex
 
 ### Versoes
     - Python: completo
-    - Rust: em desenvolvimento (aprendizado).
+    - Rust: em desenvolvimento (Estudo).
 
 ## TDE - Otimização de Sistemas Lineares
 - **NOME:** Erick Lemmy dos Santos Oliveira
@@ -82,54 +82,68 @@ Pivo: 3
 Variavel entrando: x1
 Variavel saindo: s3
 
-┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│    2   │    1   │    1   │    0   │    0   │   18   │   s1   │
-│    2   │    3   │    0   │    1   │    0   │   42   │   s2   │
-│    3   │    1   │    0   │    0   │    1   │   24   │   s3   │
-│   -3   │   -2   │    0   │    0   │    0   │    0   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Tabela Atual:
+┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
+┃ x1 ┃ x2 ┃ s1 ┃ s2 ┃ s3 ┃ b  ┃
+┡━━━━╇━━━━╇━━━━╇━━━━╇━━━━╇━━━━┩
+│ 2  │ 1  │ 1  │ 0  │ 0  │ 18 │
+│ 2  │ 3  │ 0  │ 1  │ 0  │ 42 │
+│ 3  │ 1  │ 0  │ 0  │ 1  │ 24 │
+│ -3 │ -2 │ 0  │ 0  │ 0  │ 0  │
+└────┴────┴────┴────┴────┴────┘
 Soluçao atual:
-{'x1': 0, 'x2': 0, 's1': Fraction(18, 1), 's2': Fraction(42, 1), 's3': Fraction(24, 1), 'z': 0}
+x1: 0; x2: 0; s1: 18; s2: 42; s3: 24; z: 0;
+
 Press enter to continue...
 Iteração: 1
 Pivo: 1/3
 Variavel entrando: x2
 Variavel saindo: s1
 
-┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│    0   │   1/3  │    1   │    0   │  -2/3  │    2   │   s1   │
-│    0   │   7/3  │    0   │    1   │  -2/3  │   26   │   s2   │
-│    1   │   1/3  │    0   │    0   │   1/3  │    8   │   x1   │
-│    0   │   -1   │    0   │    0   │    1   │   24   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Tabela Atual:
+┏━━━━┳━━━━━┳━━━━┳━━━━┳━━━━━━┳━━━━┓
+┃ x1 ┃ x2  ┃ s1 ┃ s2 ┃ s3   ┃ b  ┃
+┡━━━━╇━━━━━╇━━━━╇━━━━╇━━━━━━╇━━━━┩
+│ 0  │ 1/3 │ 1  │ 0  │ -2/3 │ 2  │
+│ 0  │ 7/3 │ 0  │ 1  │ -2/3 │ 26 │
+│ 1  │ 1/3 │ 0  │ 0  │ 1/3  │ 8  │
+│ 0  │ -1  │ 0  │ 0  │ 1    │ 24 │
+└────┴─────┴────┴────┴──────┴────┘
 Soluçao atual:
-{'x1': Fraction(8, 1), 'x2': 0, 's1': Fraction(2, 1), 's2': Fraction(26, 1), 's3': 0, 'z': Fraction(24, 1)}
+x1: 8; x2: 0; s1: 2; s2: 26; s3: 0; z: 24;
+
 Press enter to continue...
 Iteração: 2
 Pivo: 4
 Variavel entrando: s3
 Variavel saindo: s2
 
-┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│    0   │    1   │    3   │    0   │   -2   │    6   │   x2   │
-│    0   │    0   │   -7   │    1   │    4   │   12   │   s2   │
-│    1   │    0   │   -1   │    0   │    1   │    6   │   x1   │
-│    0   │    0   │    3   │    0   │   -1   │   30   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Tabela Atual:
+┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
+┃ x1 ┃ x2 ┃ s1 ┃ s2 ┃ s3 ┃ b  ┃
+┡━━━━╇━━━━╇━━━━╇━━━━╇━━━━╇━━━━┩
+│ 0  │ 1  │ 3  │ 0  │ -2 │ 6  │
+│ 0  │ 0  │ -7 │ 1  │ 4  │ 12 │
+│ 1  │ 0  │ -1 │ 0  │ 1  │ 6  │
+│ 0  │ 0  │ 3  │ 0  │ -1 │ 30 │
+└────┴────┴────┴────┴────┴────┘
 Soluçao atual:
-{'x1': Fraction(6, 1), 'x2': Fraction(6, 1), 's1': 0, 's2': Fraction(12, 1), 's3': 0, 'z': Fraction(30, 1)}
-Press enter to continue...
-Número de iterações: 3
-Status da tabela do Simplex:
+x1: 6; x2: 6; s1: 0; s2: 12; s3: 0; z: 30;
 
-┌───x1───┬───x2───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│    0   │    1   │  -1/2  │   1/2  │    0   │   12   │   x2   │
-│    0   │    0   │  -7/4  │   1/4  │    1   │    3   │   s3   │
-│    1   │    0   │   3/4  │  -1/4  │    0   │    3   │   x1   │
-│    0   │    0   │   5/4  │   1/4  │    0   │   33   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┘
-A soluçao é otima
-Solução encontrada:
+Press enter to continue...
+
+Solução:
+┏━━━━━━┳━━━━┳━━━━┳━━━━━━┳━━━━━━┳━━━━┳━━━━┓
+┃ Base ┃ x1 ┃ x2 ┃   s1 ┃   s2 ┃ s3 ┃  b ┃
+┡━━━━━━╇━━━━╇━━━━╇━━━━━━╇━━━━━━╇━━━━╇━━━━┩
+│   x2 │  0 │  1 │ -1/2 │  1/2 │  0 │ 12 │
+│   s3 │  0 │  0 │ -7/4 │  1/4 │  1 │  3 │
+│   x1 │  1 │  0 │  3/4 │ -1/4 │  0 │  3 │
+│    z │  0 │  0 │  5/4 │  1/4 │  0 │ 33 │
+└──────┴────┴────┴──────┴──────┴────┴────┘
+Existem múltiplas soluções ótimas.
+
+Solução Encontrada:
 x1: 3
 x2: 12
 s1: 0
@@ -141,86 +155,84 @@ z: 33
 ---
 
 #### 2. Input:
-Maximize $\to$ $Z = 1x_1 + 2x_2 -1x_3$ <br>
+
+- Solucao Unica
+  
+Maximize $\to$ $Z = 1x_1 + 1x_2$ <br>
 $S.t:$ <br>
-    $2x_1 + 1x_2 + 1x_3 \leq 18$ <br>
-    $4x_1 + 2x_2 + 3x_3 \leq 42$ <br>
-    $2x_1 + 5x_2 + 5x_3 \leq 24$ <br>
-$x_1, x_2, x_3, x_4, x_5, x_6 \geq 0$ <br>
+    $1x_1 + 2x_2 \leq 4$ <br>
+    $4x_1 + 2x_2 \leq 12$ <br>
+$x_1, x_2 \geq 0$ <br>
 
 ```python 
-A = [[2, 1, 1], [4, 2, 3], [2, 5, 5]]
-C = [1, 2, -1]
-b = [14, 28, 30]
-ineq = ["<=", "<=", "<="]
+A = [[1, 2], [4, 2]]
+C = [1, 1]
+b = [4, 12]
+ineq = ["<=", "<="]
 ```
 
 #### 2. Output:
 ```python
-Press enter to continue...
-Degeneração detectada: Há múltiplas variáveis básicas com a mesma razão.
-Iteração: 0
-Pivo: 5
-Variavel entrando: x2
-Variavel saindo: s3
-
-┌───x1───┬───x2───┬───x3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│    2   │    1   │    1   │    1   │    0   │    0   │   14   │   s1   │
-│    4   │    2   │    3   │    0   │    1   │    0   │   28   │   s2   │
-│    2   │    5   │    5   │    0   │    0   │    1   │   30   │   s3   │
-│   -1   │   -2   │    1   │    0   │    0   │    0   │    0   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Tabela Atual:
+┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
+┃ x1 ┃ x2 ┃ s1 ┃ s2 ┃ b  ┃
+┡━━━━╇━━━━╇━━━━╇━━━━╇━━━━┩
+│ 1  │ 2  │ 1  │ 0  │ 4  │
+│ 4  │ 2  │ 0  │ 1  │ 12 │
+│ -1 │ -1 │ 0  │ 0  │ 0  │
+└────┴────┴────┴────┴────┘
 Soluçao atual:
-{'x1': 0, 'x2': 0, 'x3': 0, 's1': Fraction(14, 1), 's2': Fraction(28, 1), 's3': Fraction(30, 1), 'z': 0}
+x1: 0; x2: 0; s1: 4; s2: 12; z: 0;
+
 Press enter to continue...
-Degeneração detectada: Há múltiplas variáveis básicas com a mesma razão.
 Iteração: 1
-Pivo: 8/5
-Variavel entrando: x1
+Pivo: 3/2
+Variavel entrando: x2
 Variavel saindo: s1
 
-┌───x1───┬───x2───┬───x3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│   8/5  │    0   │    0   │    1   │    0   │  -1/5  │    8   │   s1   │
-│  16/5  │    0   │    1   │    0   │    1   │  -2/5  │   16   │   s2   │
-│   2/5  │    1   │    1   │    0   │    0   │   1/5  │    6   │   x2   │
-│  -1/5  │    0   │    3   │    0   │    0   │   2/5  │   12   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Tabela Atual:
+┏━━━━┳━━━━━━┳━━━━┳━━━━━━┳━━━┓
+┃ x1 ┃ x2   ┃ s1 ┃ s2   ┃ b ┃
+┡━━━━╇━━━━━━╇━━━━╇━━━━━━╇━━━┩
+│ 0  │ 3/2  │ 1  │ -1/4 │ 1 │
+│ 1  │ 1/2  │ 0  │ 1/4  │ 3 │
+│ 0  │ -1/2 │ 0  │ 1/4  │ 3 │
+└────┴──────┴────┴──────┴───┘
 Soluçao atual:
-{'x1': 0, 'x2': Fraction(6, 1), 'x3': 0, 's1': Fraction(8, 1), 's2': Fraction(16, 1), 's3': 0, 'z': Fraction(12, 1)}
-Press enter to continue...
-Número de iterações: 2
-Status da tabela do Simplex:
+x1: 3; x2: 0; s1: 1; s2: 0; z: 3;
 
-┌───x1───┬───x2───┬───x3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│    1   │    0   │    0   │   5/8  │    0   │  -1/8  │    5   │   x1   │
-│    0   │    0   │    1   │   -2   │    1   │    0   │    0   │   s2   │
-│    0   │    1   │    1   │  -1/4  │    0   │   1/4  │    4   │   x2   │
-│    0   │    0   │    3   │   1/8  │    0   │   3/8  │   13   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
-A soluçao encontrada é otima pois (Zj - Cj >= 0)
-Porem como existem variaveis basicas nulas.
-Exitem infinitas solucoes possiveis para x_n
-Solução encontrada:
-x1: 5
-x2: 4
-x3: 0
+Press enter to continue...
+
+Solução:
+┏━━━━━━┳━━━━┳━━━━┳━━━━━━┳━━━━━━┳━━━━━━┓
+┃ Base ┃ x1 ┃ x2 ┃   s1 ┃   s2 ┃    b ┃
+┡━━━━━━╇━━━━╇━━━━╇━━━━━━╇━━━━━━╇━━━━━━┩
+│   x2 │  0 │  1 │  2/3 │ -1/6 │  2/3 │
+│   x1 │  1 │  0 │ -1/3 │  1/3 │  8/3 │
+│    z │  0 │  0 │  1/3 │  1/6 │ 10/3 │
+└──────┴────┴────┴──────┴──────┴──────┘
+A solução é única e ótima.
+
+Solução Encontrada:
+x1: 8/3
+x2: 2/3
 s1: 0
 s2: 0
-s3: 0
-z: 13
+z: 10/3
 ```
 
 ---
 
 #### 3. Input:
 
+- Multiplas Soluções 
 ![exemplo_3](/imgs/exemplo_3.png)
 
 Minimize $\to$ $Z = 1x_1 + 2x_2 -1x_3$ <br>
 $S.t:$ <br>
-    $2x_1 + 1x_2 + 1x_3 \leq 18$ <br>
-    $4x_1 + 2x_2 + 3x_3 \leq 42$ <br>
-    $2x_1 + 5x_2 + 5x_3 \leq 24$ <br>
+    $2x_1 + 1x_2 + 1x_3 \leq 14$ <br>
+    $4x_1 + 2x_2 + 3x_3 \leq 28$ <br>
+    $2x_1 + 5x_2 + 5x_3 \leq 30$ <br>
 $x_1, x_2, x_3, x_4, x_5, x_6 \geq 0$ <br>
 
 ```python 
@@ -238,28 +250,32 @@ Pivo: 5
 Variavel entrando: y3
 Variavel saindo: s3
 
-┌───y1───┬───y2───┬───y3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│    2   │    1   │    1   │    1   │    0   │    0   │   14   │   s1   │
-│    4   │    2   │    3   │    0   │    1   │    0   │   28   │   s2   │
-│    2   │    5   │    5   │    0   │    0   │    1   │   30   │   s3   │
-│    1   │    2   │   -1   │    0   │    0   │    0   │    0   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
+Tabela Atual:
+┏━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
+┃ y1 ┃ y2 ┃ y3 ┃ s1 ┃ s2 ┃ s3 ┃ b  ┃
+┡━━━━╇━━━━╇━━━━╇━━━━╇━━━━╇━━━━╇━━━━┩
+│ 2  │ 1  │ 1  │ 1  │ 0  │ 0  │ 14 │
+│ 4  │ 2  │ 3  │ 0  │ 1  │ 0  │ 28 │
+│ 2  │ 5  │ 5  │ 0  │ 0  │ 1  │ 30 │
+│ 1  │ 2  │ -1 │ 0  │ 0  │ 0  │ 0  │
+└────┴────┴────┴────┴────┴────┴────┘
 Soluçao atual:
-{'y1': 0, 'y2': 0, 'y3': 0, 's1': Fraction(14, 1), 's2': Fraction(28, 1), 's3': Fraction(30, 1), 'z': 0, 'x1': 0, 'x2': 0, 'x3': 0}
-Press enter to continue...
-Número de iterações: 1
-Status da tabela do Simplex:
+y1: 0; y2: 0; y3: 0; s1: 14; s2: 28; s3: 30; z: 0;
 
-┌───y1───┬───y2───┬───y3───┬───s1───┬───s2───┬───s3───┬────b───┬────────┐
-│   8/5  │    0   │    0   │    1   │    0   │  -1/5  │    8   │   s1   │
-│  14/5  │   -1   │    0   │    0   │    1   │  -3/5  │   10   │   s2   │
-│   2/5  │    1   │    1   │    0   │    0   │   1/5  │    6   │   y3   │
-│   7/5  │    3   │    0   │    0   │    0   │   1/5  │    6   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┴────────┴────────┘
-A soluçao encontrada é otima pois (Zj - Cj >= 0)
-Porem como existem variaveis basicas nulas.
-Exitem infinitas solucoes possiveis para x_n
-Solução encontrada:
+Press enter to continue...
+
+Solução:
+┏━━━━━━┳━━━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━━━┳━━━━┓
+┃ Base ┃   y1 ┃ y2 ┃ y3 ┃ s1 ┃ s2 ┃   s3 ┃  b ┃
+┡━━━━━━╇━━━━━━╇━━━━╇━━━━╇━━━━╇━━━━╇━━━━━━╇━━━━┩
+│   s1 │  8/5 │  0 │  0 │  1 │  0 │ -1/5 │  8 │
+│   s2 │ 14/5 │ -1 │  0 │  0 │  1 │ -3/5 │ 10 │
+│   y3 │  2/5 │  1 │  1 │  0 │  0 │  1/5 │  6 │
+│    z │  7/5 │  3 │  0 │  0 │  0 │  1/5 │  6 │
+└──────┴──────┴────┴────┴────┴────┴──────┴────┘
+Existem múltiplas soluções ótimas.
+
+Solução Encontrada:
 y1: 0
 y2: 0
 y3: 6
@@ -267,9 +283,6 @@ s1: 8
 s2: 10
 s3: 0
 z: 6
-x1: 0
-x2: 0
-x3: 1/5
 ```
 
 ---
@@ -298,17 +311,30 @@ Pivo: 1
 Variavel entrando: x1
 Variavel saindo: s1
 
-┌───x1───┬───x2───┬───s1───┬───s2───┬────b───┬────────┐
-│    1   │    0   │    1   │    0   │    7   │   s1   │
-│    1   │   -1   │    0   │    1   │    8   │   s2   │
-│   -5   │   -4   │    0   │    0   │    0   │    z   │
-└────────┴────────┴────────┴────────┴────────┴────────┘
+Tabela Atual:
+┏━━━━┳━━━━┳━━━━┳━━━━┳━━━┓
+┃ x1 ┃ x2 ┃ s1 ┃ s2 ┃ b ┃
+┡━━━━╇━━━━╇━━━━╇━━━━╇━━━┩
+│ 1  │ 0  │ 1  │ 0  │ 7 │
+│ 1  │ -1 │ 0  │ 1  │ 8 │
+│ -5 │ -4 │ 0  │ 0  │ 0 │
+└────┴────┴────┴────┴───┘
 Soluçao atual:
-{'x1': 0, 'x2': 0, 's1': Fraction(7, 1), 's2': Fraction(8, 1), 'z': 0}
+x1: 0; x2: 0; s1: 7; s2: 8; z: 0;
+
 Press enter to continue...
-Soluçao ilimitada (UNBOUNDED). O Problema não possui fronteira
-Todos os elementos da coluna que entra na base sao menores que ZERO ou NULOS.
+
+Solução:
+┏━━━━━━┳━━━━┳━━━━┳━━━━┳━━━━┳━━━━┓
+┃ Base ┃ x1 ┃ x2 ┃ s1 ┃ s2 ┃  b ┃
+┡━━━━━━╇━━━━╇━━━━╇━━━━╇━━━━╇━━━━┩
+│   x1 │  1 │  0 │  1 │  0 │  7 │
+│   s2 │  0 │ -1 │ -1 │  1 │  1 │
+│    z │  0 │ -4 │  5 │  0 │ 35 │
+└──────┴────┴────┴────┴────┴────┘
+A solução é ilimitada (UNBOUNDED).
+Nenhuma solução foi encontrada.
 ```
 
 #### Programa funcionando:
-![programa_completo](/imgs/programa_rodando.png)
+![programa_completo](/imgs/complete_solution.png)

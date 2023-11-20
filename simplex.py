@@ -75,8 +75,8 @@ class SimplexSolver:
 
     def check_multiple_solutions(self, solution):
         var_prefix = "x" if not self.tableau.is_minimize else "y"
-        non_basic_vars = [v for v in self.tableau.entering if v.startswith(var_prefix)]
-        return any(self.tableau.tableau[-1][self.tableau.entering.index(v)] == 0 for v in non_basic_vars)
+        return any(value == 0 for key, value in solution.items() if key.startswith(var_prefix))
+
 
     def get_current_solution(self):
         solution = {}
@@ -226,7 +226,7 @@ class SimplexTableau:
 class UserInterface:
     def __init__(self):
         self.console = Console()
-        self.instructions = "Bem-vindo ao solucionador Simplex! Siga as instruções para inserir os dados do problema."
+        self.instructions = "Bem-vindo ao solucionador Simplex!\nSiga as instruções para inserir os dados do problema."
 
     def display_instructions(self):
         self.console.print(self.instructions, style="bold blue")
@@ -245,16 +245,16 @@ class UserInterface:
             A, C, b, ineq = [], [], [], []
 
             for i in range(num_equations):
-                row = list(map(float, input(f"Coeficientes da equação {i + 1}: ").split()))
+                row = list(map(float, input(f"Coeficientes da equação {i + 1} (separados por espaço): ").split()))
                 if len(row) != num_variables:
                     raise ValueError("Número de coeficientes diferente do número de variáveis.")
                 A.append(row)
 
-            C = list(map(float, input("Coeficientes da função objetivo: ").split()))
+            C = list(map(float, input("Coeficientes da função objetivo (separados por espaço): ").split()))
             if len(C) != num_variables:
                 raise ValueError("Número de coeficientes diferente do número de variáveis.")
 
-            b = list(map(float, input("Valores do vetor de constantes: ").split()))
+            b = list(map(float, input("Valores do vetor de constantes (separados por espaço): ").split()))
             if len(b) != num_equations:
                 raise ValueError("Número de constantes diferente do número de equações.")
 
@@ -339,9 +339,8 @@ def main():
         return
 
     is_minimize = ui.input_minimize_maximize()
-    print(is_minimize)
-
     solver = SimplexSolver()
+
     if is_minimize:
         solver.minimize(A, b, ineq, C)
         ui.simplex_show(solver.tableau, is_minimize, ineq)
