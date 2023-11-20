@@ -225,7 +225,8 @@ z: 10/3
 
 #### 3. Input:
 
-- Multiplas Soluções 
+- Multiplas Soluções
+
 ![exemplo_3](/imgs/exemplo_3.png)
 
 Minimize $\to$ $Z = 1x_1 + 2x_2 -1x_3$ <br>
